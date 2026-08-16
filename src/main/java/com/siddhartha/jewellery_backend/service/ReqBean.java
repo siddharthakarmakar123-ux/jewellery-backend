@@ -26,4 +26,6 @@ public class ReqBean {
 	private String reqType;
 	private String userName;
 	private String password;
+	private String goldRatePerGram;
+    private String silverRatePerGram;
 }

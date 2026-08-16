@@ -10,7 +10,7 @@ import lombok.Data;
 @Entity
 @Table(name = "mm_gen_customer")
 @Data
-public class mmGenCustomerEntity {
+public class MmGenCustomerEntity {
 
     @Id
     @Column(name = "int_customer_id")

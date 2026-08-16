@@ -7,27 +7,27 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.siddhartha.jewellery_backend.dto.CommonFunctions;
-import com.siddhartha.jewellery_backend.entity.mmGenCustomerEntity;
-import com.siddhartha.jewellery_backend.repo.mmGenCustomerRepo;
+import com.siddhartha.jewellery_backend.entity.MmGenCustomerEntity;
+import com.siddhartha.jewellery_backend.repo.MmGenCustomerRepo;
 
 @Service
-public class mmGenCustomerService {
+public class MmGenCustomerService {
 
-	private final mmGenCustomerRepo mmGenCustomerRepo;
+	private final MmGenCustomerRepo mmGenCustomerRepo;
 
-	public mmGenCustomerService(mmGenCustomerRepo mmGenCustomerRepo) {
+	public MmGenCustomerService(MmGenCustomerRepo mmGenCustomerRepo) {
 		this.mmGenCustomerRepo = mmGenCustomerRepo;
 	}
 
-	public mmGenCustomerEntity saveCustomer(ReqBean req) throws Exception {
+	public MmGenCustomerEntity saveCustomer(ReqBean req) throws Exception {
 
 		if (null == req.getMobile() || "".equals(req.getMobile()))
 			throw new Exception("Mobile not present in request");
 		if (null == req.getFullName() || "".equals(req.getFullName()))
 			throw new Exception("FullName not present in request");
 
-		List<mmGenCustomerEntity> existingData = mmGenCustomerRepo.getByMobileAndActiveFlag(req.getMobile(), "Y");
-		mmGenCustomerEntity dataToSave = new mmGenCustomerEntity();
+		List<MmGenCustomerEntity> existingData = mmGenCustomerRepo.getByMobileAndActiveFlag(req.getMobile(), "Y");
+		MmGenCustomerEntity dataToSave = new MmGenCustomerEntity();
 		if (existingData.size() > 0) {
 			System.out.println("Data already present going for update");
 			dataToSave.setCustomerId(existingData.get(0).getCustomerId());
@@ -35,9 +35,9 @@ public class mmGenCustomerService {
 		} else {
 			System.out.println("Data not present going for insert");
 			dataToSave.setCustomerId(Long.parseLong(CommonFunctions.generateId()));
-			String customerNo = CommonFunctions.generateCustomerNumber();
+			String customerNo = CommonFunctions.generateUniqueNumber("C");
 			if (mmGenCustomerRepo.getByCustomerNumber(customerNo).size() > 0) {
-				customerNo = CommonFunctions.generateCustomerNumber();
+				customerNo = CommonFunctions.generateUniqueNumber("C");
 			}
 			dataToSave.setCustomerNumber(customerNo);
 		}
@@ -51,11 +51,11 @@ public class mmGenCustomerService {
 		return mmGenCustomerRepo.save(dataToSave);
 	}
 
-	public List<mmGenCustomerEntity> searchCustomer(ReqBean req) throws Exception {
+	public List<MmGenCustomerEntity> searchCustomer(ReqBean req) throws Exception {
 
 		if (null == req.getReqType())
 			throw new Exception("ReqType not present in request");
-		List<mmGenCustomerEntity> respData = new ArrayList<mmGenCustomerEntity>();
+		List<MmGenCustomerEntity> respData = new ArrayList<MmGenCustomerEntity>();
 
 		if ("M".equals(req.getReqType())) {
 			if (null == req.getMobile() || "".equals(req.getMobile()))

@@ -5,14 +5,14 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.siddhartha.jewellery_backend.entity.mmGenEmployeeEntity;
+import com.siddhartha.jewellery_backend.entity.MmGenEmployeeEntity;
 
-public interface mmGenEmployeeRepo extends JpaRepository<mmGenEmployeeEntity, Long> {
+public interface MmGenEmployeeRepo extends JpaRepository<MmGenEmployeeEntity, Long> {
 	
-	Optional<mmGenEmployeeEntity> getByUsernameAndActiveFlag(String userName,String activeFlag);
+	Optional<MmGenEmployeeEntity> getByUsernameAndActiveFlag(String userName,String activeFlag);
 
-	List<mmGenEmployeeEntity> getByUsername(String userName);
+	List<MmGenEmployeeEntity> getByUsername(String userName);
 
-	List<mmGenEmployeeEntity> getByEmployeeNumber(String employeeNo);
+	List<MmGenEmployeeEntity> getByEmployeeNumber(String employeeNo);
 
 }

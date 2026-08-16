@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 @Table(name = "mm_gen_employee")
 @Data
-public class mmGenEmployeeEntity {
+public class MmGenEmployeeEntity {
 
 	@Id
 	@Column(name = "int_employee_id")
@@ -31,6 +31,9 @@ public class mmGenEmployeeEntity {
 
 	@Column(name = "active_flag", nullable = false)
 	private String activeFlag;
+	
+	@Column(name = "role_abbr", nullable = false)
+	private String roleAbbr;
 
 	@Column(name = "created_timestamp")
 	private Timestamp createdTimestamp;

@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.siddhartha.jewellery_backend.entity.mmGenCustomerEntity;
+import com.siddhartha.jewellery_backend.entity.MmGenCustomerEntity;
 import com.siddhartha.jewellery_backend.service.ReqBean;
 import com.siddhartha.jewellery_backend.service.RequestBean;
-import com.siddhartha.jewellery_backend.service.mmGenCustomerService;
+import com.siddhartha.jewellery_backend.service.MmGenCustomerService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/mmGenCustomer")
-public class mmGenCustomerController {
+public class MmGenCustomerController {
 
-	private final mmGenCustomerService mmGenCustomerService;
+	private final MmGenCustomerService mmGenCustomerService;
 
-	public mmGenCustomerController(mmGenCustomerService mmGenCustomerService) {
+	public MmGenCustomerController(MmGenCustomerService mmGenCustomerService) {
 		this.mmGenCustomerService = mmGenCustomerService;
 	}
 
 	@PostMapping("/post/save/customerData")
-	public ResponseEntity<mmGenCustomerEntity> createCustomer(@RequestBody @Valid RequestBean requestBean) throws Exception {
+	public ResponseEntity<MmGenCustomerEntity> createCustomer(@RequestBody @Valid RequestBean requestBean) throws Exception {
 		
 		if(null != requestBean && null != requestBean.getReq())
 		{
 			ReqBean req = requestBean.getReq();
-		mmGenCustomerEntity savedCustomer = mmGenCustomerService.saveCustomer(req);
+		MmGenCustomerEntity savedCustomer = mmGenCustomerService.saveCustomer(req);
 
 		return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
 		}else {
@@ -41,12 +41,12 @@ public class mmGenCustomerController {
 	}
 	
 	@PostMapping("/post/search/customerData")
-	public ResponseEntity<List<mmGenCustomerEntity>> searchCustomer(@RequestBody RequestBean requestBean) throws Exception {
+	public ResponseEntity<List<MmGenCustomerEntity>> searchCustomer(@RequestBody RequestBean requestBean) throws Exception {
 		
 		if(null != requestBean && null != requestBean.getReq())
 		{
 			ReqBean req = requestBean.getReq();
-		List<mmGenCustomerEntity> data = mmGenCustomerService.searchCustomer(req);
+		List<MmGenCustomerEntity> data = mmGenCustomerService.searchCustomer(req);
 
 		return new ResponseEntity<>(data, HttpStatus.OK);
 		}else {

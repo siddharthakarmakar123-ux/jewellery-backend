@@ -13,15 +13,17 @@ public class CommonFunctions {
 		int randomNumber = random.nextInt(1000);
 		return String.format("%013d%03d", timestamp, randomNumber);
 	}
-	
-	public static String generateCustomerNumber() {
 
-        int number = ThreadLocalRandom.current().nextInt(0, 100000);
-        return String.format("C%05d", number);
-    }
+	public static String generateUniqueNumber(String idType) {
 
-	public static String generateEmployeeNumber() {
 		int number = ThreadLocalRandom.current().nextInt(0, 100000);
-        return String.format("E%05d", number);
+		if ("C".equals(idType))
+			return String.format("C%05d", number);
+		else if ("E".equals(idType))
+			return String.format("E%05d", number);
+		else if ("O".equals(idType))
+			return String.format("O%05d", number);
+		else
+			return String.format("M%05d", number);
 	}
 }

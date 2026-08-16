@@ -9,20 +9,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.siddhartha.jewellery_backend.entity.mmGenCustomerEntity;
-import com.siddhartha.jewellery_backend.entity.mmGenEmployeeEntity;
+import com.siddhartha.jewellery_backend.dto.LoginResponse;
+import com.siddhartha.jewellery_backend.entity.MmGenCustomerEntity;
+import com.siddhartha.jewellery_backend.entity.MmGenEmployeeEntity;
 import com.siddhartha.jewellery_backend.service.ReqBean;
 import com.siddhartha.jewellery_backend.service.RequestBean;
-import com.siddhartha.jewellery_backend.service.loginService;
-import com.siddhartha.jewellery_backend.service.mmGenCustomerService;
+import com.siddhartha.jewellery_backend.service.LoginService;
+import com.siddhartha.jewellery_backend.service.MmGenCustomerService;
 
 @RestController
 @RequestMapping("/api/login")
-public class loginController {
+public class LoginController {
 
-	private final loginService loginService;
+	private final LoginService loginService;
 
-	public loginController(loginService loginService) {
+	public LoginController(LoginService loginService) {
 		this.loginService = loginService;
 	}
 
@@ -31,7 +32,7 @@ public class loginController {
 			try {
 				if (null != requestBean && null != requestBean.getReq()) {
 				ReqBean req = requestBean.getReq();
-				mmGenEmployeeEntity data = loginService.login(req);
+				LoginResponse data = loginService.login(req);
 
 				return new ResponseEntity<>(data, HttpStatus.OK);
 				} else {
@@ -49,7 +50,7 @@ public class loginController {
 			try {
 				if (null != requestBean && null != requestBean.getReq()) {
 				ReqBean req = requestBean.getReq();
-				mmGenEmployeeEntity data = loginService.signup(req);
+				MmGenEmployeeEntity data = loginService.signup(req);
 
 				return new ResponseEntity<>(data, HttpStatus.CREATED);
 				} else {
